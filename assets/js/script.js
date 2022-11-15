@@ -21,7 +21,7 @@ function countdown(){
     hoursDiv.innerHTML=hours;
     minsDiv.innerHTML=mins;
     secoundDiv.innerHTML=secound;
-    console.log( days,hours,mins,secound);
+    //console.log( days,hours,mins,secound);
     
  }
 countdown();
@@ -99,6 +99,8 @@ var formElement = document.forms['quizForm'];
 formElement.onsubmit = function submitAnswers() {
   var total = 5;
   var score = 0;
+  var modal = document.getElementById("myModal");
+  var modalContent = document.getElementById("modal-content")
 
   // Get User Input
   var q1 = document.forms["quizForm"]["q1"].value,
@@ -110,6 +112,9 @@ formElement.onsubmit = function submitAnswers() {
   // Validation
   for (i = 1; i <= total; i++) {
     if (eval('q' + i) === null || eval('q' + i) === '') {
+		console.log("you missed")
+		modal.style.display = "block";
+		modalContent.innerHTML += `<p>You missed some questions!</p>`
       //alert('You missed question '+ i);
       return false;
     }
@@ -144,6 +149,7 @@ formElement.onsubmit = function submitAnswers() {
 	//if (z < total){
 	  // Get the modal
 		var modal = document.getElementById("myModal");
+		var modalContent = document.getElementById("modal-content")
 
 		// Get the button that opens the modal
 		var btn = document.getElementById("myBtn");
@@ -152,10 +158,17 @@ formElement.onsubmit = function submitAnswers() {
 		var span = document.getElementsByClassName("close")[0];
 
 		// When the user clicks the button, open the modal 
-		btn.onclick = function() {
-		modal.style.display = "block";
-		}
 
+		/* btn.onclick = function() {
+		modal.style.display = "block";
+		if(selectedQuestions === 5){
+			modalContent.innerHTML += `<p>congrats you scored 5/10!</p>`
+		}else{
+			modalContent.innerHTML += `<p>You missed some questions!</p>`
+		}
+		
+		}
+ */
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {
 		modal.style.display = "none";
